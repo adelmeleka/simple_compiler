@@ -1,0 +1,36 @@
+EEXP Start 0
+EXTREF XREAD,XWRITE
+STL RETADR
+j {EXADDR}
+RETADR RESW 1
+a RESW 1
+b RESW 1
+left RESW 1
+right RESW 1
+result RESW 1
+{EXADDR} LDA #0
++JSUB XREAD
+WORD 2
+WORD a
+WORD b
++JSUB XWRITE
+WORD 2
+WORD a
+WORD b
+LDA a
+ADD b
+ADD left
+STA left
+LDA a
+ADD b
+ADD right
+STA right
+LDA left
+MUL right
+STA result
++JSUB XWRITE
+WORD 1
+WORD result
+LDL RETADR
+RSUB
+END
